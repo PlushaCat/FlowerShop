@@ -23,6 +23,9 @@ namespace FlowerShop
         public MainWindow()
         {
             InitializeComponent();
+            DatabaseFlower.entity = new flowershopEntitiesd();
+            ListView1.ItemsSource = DatabaseFlower.entity.goods.ToList();
+
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
