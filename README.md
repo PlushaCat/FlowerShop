@@ -1,3 +1,3 @@
 # FlowerShop
 Это цветочный магазин на WPF. 
-https://docs.google.com/spreadsheets/u/0/d/1aiaGhk3846aHpRAsljzTTeCFAjIlijfpMqQEht-NoNg/htmlview
+В цветочном магазине продают цветы, дополнения к букету, например, карточки или топперы, воздушные шары. Горшечные растения и товары для ухода за ними.
