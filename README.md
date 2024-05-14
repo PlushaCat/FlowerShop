@@ -22,6 +22,10 @@
 
 ![image](https://github.com/PlushaCat/FlowerShop/assets/104760630/d4560055-b602-4399-98ac-c6884cacd6ce)
 
+Диаграмма базы данных:
+
+![image](https://github.com/PlushaCat/FlowerShop/assets/104760630/6b8da5c9-1a16-4d12-bfca-6d529fb7fb9d)
+
 
 
 
