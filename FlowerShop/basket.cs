@@ -17,9 +17,10 @@ namespace FlowerShop
         public int idbasket { get; set; }
         public Nullable<int> idgood { get; set; }
         public Nullable<int> iduser { get; set; }
+        public Nullable<int> quantity { get; set; }
     
-        public virtual goods goods { get; set; }
         public virtual orders orders { get; set; }
         public virtual users users { get; set; }
+        public virtual goods goods { get; set; }
     }
 }

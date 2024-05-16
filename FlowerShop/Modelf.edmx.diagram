@@ -6,15 +6,15 @@
     <edmx:Diagrams>
       <Diagram DiagramId="6b6f70e96b7941c49795057ca45e8b19" Name="Diagram1">
         <EntityTypeShape EntityType="flowershopModeld.category" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="flowershopModeld.goods" Width="1.5" PointX="3.75" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="flowershopModeld.orders" Width="1.5" PointX="1" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="flowershopModeld.sysdiagrams" Width="1.5" PointX="12.75" PointY="4.375" IsExpanded="true" />
         <EntityTypeShape EntityType="flowershopModeld.users" Width="1.5" PointX="4.5" PointY="4" IsExpanded="true" />
-        <AssociationConnector Association="flowershopModeld.FK_goods_category" ManuallyRouted="false" />
         <EntityTypeShape EntityType="flowershopModeld.basket" Width="1.5" PointX="7.25" PointY="1.875" />
-        <AssociationConnector Association="flowershopModeld.FK_basket_goods1" />
         <AssociationConnector Association="flowershopModeld.FK_basket_orders" />
         <AssociationConnector Association="flowershopModeld.FK_basket_users" />
+        <EntityTypeShape EntityType="flowershopModeld.goods" Width="1.5" PointX="4.25" PointY="0.875" />
+        <AssociationConnector Association="flowershopModeld.FK_goods_category" />
+        <AssociationConnector Association="flowershopModeld.FK_basket_goods1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

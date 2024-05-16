@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlowerShop"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" WindowStyle="SingleBorderWindow" ResizeMode="CanResize" SizeToContent="Manual" MaxHeight="800" MaxWidth="800">
     <Grid>
 
         <Grid HorizontalAlignment="Center" Width="800" Height="55" VerticalAlignment="Top">
@@ -16,13 +16,13 @@
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
-            <ComboBox HorizontalAlignment="Left" Margin="10,28,0,0" VerticalAlignment="Top" Width="120"/>
+            <ComboBox x:Name="SortBy" HorizontalAlignment="Left" Margin="10,28,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="SortBy_SelectionChanged"/>
             <Label Content="Сортировка" HorizontalAlignment="Left" Margin="32,2,0,0" VerticalAlignment="Top"/>
-            <Label Grid.Column="1" Content="Поиск" HorizontalAlignment="Center" VerticalAlignment="Top" Width="78"/>
-            <TextBox Grid.Column="1" HorizontalAlignment="Center" TextWrapping="Wrap" Text="....." VerticalAlignment="Top" Width="139" Height="22" Margin="0,28,0,0"/>
+            <Label Grid.Column="2" Content="Поиск" HorizontalAlignment="Center" VerticalAlignment="Top" Width="78"/>
+            <TextBox Grid.Column="2" HorizontalAlignment="Center" TextWrapping="Wrap" Text="....." VerticalAlignment="Top" Width="139" Height="22" Margin="0,28,0,0"/>
             <Button Grid.Column="4" Content="Сделать заказ" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.517,-0.042" Height="45" Width="112"/>
-            <ComboBox Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Margin="0,28,0,0"/>
-            <Label Grid.Column="2" Content="Категория" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <ComboBox x:Name="sortProp" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" Margin="0,28,0,0" SelectionChanged="sortProp_SelectionChanged"/>
+            <Label Grid.Column="1" Content="Фильтры" HorizontalAlignment="Center" VerticalAlignment="Top"/>
             <Button Grid.Column="3" Content="Редактирование" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" Width="144"/>
         </Grid>
         <Grid Margin="0,60,0,0">
@@ -36,7 +36,29 @@
                                 <ColumnDefinition Width="300"/>
                             </Grid.ColumnDefinitions>
                             <Image Grid.Column="0" Source="{Binding CorrectImage}"/>
-                            <TextBlock Grid.Column="1" Text="{Binding description}" />
+
+                            <TextBlock Grid.Column="1" Margin="0,0,0,107">
+                                
+                                <Run Text="{Binding name}"></Run>
+                                
+                            </TextBlock>
+
+                            <TextBlock Grid.Column="1" Margin="0,38,0,0">
+                                <Run Text="{Binding description}" Cursor="AppStarting"></Run>
+                            </TextBlock>
+
+                            <TextBlock Grid.Column="2" Margin="107,20,-107,-20">
+                                <Run Text="Цена"></Run>
+                                <Run Text="{Binding price}"></Run>
+                                <Run Text="Р."></Run>
+                            </TextBlock>
+
+                            <TextBlock Grid.Column="2" Margin="60,0,100,0">
+                                <Run></Run>
+                            </TextBlock>
+
+                            <Button Grid.Column="2" Margin="60,89,113,10">Добавить в корзину</Button>
+
                         </Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
