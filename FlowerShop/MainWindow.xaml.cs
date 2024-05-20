@@ -26,36 +26,55 @@ namespace FlowerShop
             InitializeComponent();
             DatabaseFlower.entity = new flowershopEntitiesd();
             ListView1.ItemsSource = DatabaseFlower.entity.goods.ToList();
-            SortBy.ItemsSource = new string[] { "name", "price" };
-            sortProp.ItemsSource = Enum.GetNames(typeof(ListSortDirection));
+            SortBy.ItemsSource = new string[] { "Название", "цена" };
+            var enumDirection = new string[] { "по возрастанию", "по убыванию" };
+
+            sortProp.ItemsSource = enumDirection;
+            sortProp.SelectedValue = enumDirection[0];
+            SortBy.SelectedValue = "Название";
             ListView1.Items.SortDescriptions.Add(new SortDescription("name", ListSortDirection.Ascending));
 
+            sortProp.SelectionChanged += SelectionChanged;
+            SortBy.SelectionChanged += SelectionChanged;
+
 
         }
 
-        private void sortProp_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-            string selectedSort = SortBy.SelectedItem.ToString();
             string selectedFilter = sortProp.SelectedItem.ToString();
-            ListSortDirection sortDirection = selectedFilter.Contains("Ascending") ? ListSortDirection.Ascending : ListSortDirection.Descending;
-
+            string selectedSort = SortBy.SelectedItem.ToString();
+            ListSortDirection sortDirection = selectedFilter.Contains("Повозрастания") ? ListSortDirection.Ascending : ListSortDirection.Descending;
 
             var view = (CollectionView)CollectionViewSource.GetDefaultView(ListView1.ItemsSource);
             view.SortDescriptions.Clear();
+
+            if (selectedSort == "Название")
+                selectedSort = "name";
+            if (selectedSort == "цена")
+                selectedSort = "price";
+
             view.SortDescriptions.Add(new SortDescription(selectedSort, sortDirection));
         }
 
-        private void SortBy_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            string selectedSort = SortBy.SelectedItem.ToString();
-            string selectedFilter = sortProp.SelectedItem.ToString();
-            ListSortDirection sortDirection = selectedFilter.Contains("Ascending") ? ListSortDirection.Ascending : ListSortDirection.Descending;
+
+            var selectedProduct = ListView1.SelectedItem as goods;
+
+            var cartItem = new basket
+            {
+                goods = selectedProduct,
+                idgood = selectedProduct.idgood,
+                iduser = 1,
+                quantity = 1
+                
+            };
 
 
-            var view = (CollectionView)CollectionViewSource.GetDefaultView(ListView1.ItemsSource);
-            view.SortDescriptions.Clear();
-            view.SortDescriptions.Add(new SortDescription(selectedSort, sortDirection));
-        }
+            DatabaseFlower.entity.basket.Add(cartItem);
+            DatabaseFlower.entity.SaveChanges();
+
+            }
     }
 }
