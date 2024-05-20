@@ -24,20 +24,6 @@ namespace FlowerShop
         public string name { get; set; }
         public string description { get; set; }
         public Nullable<int> price { get; set; }
-
-        public string CorrectImage
-        {
-            get
-            {
-                if (String.IsNullOrEmpty(image) || String.IsNullOrWhiteSpace(image))
-                {
-                    return $"images/picture.jpg";
-                }
-                else
-                    return $"images/{image}";
-
-            }
-        }
         public string image { get; set; }
         public Nullable<int> idcategory { get; set; }
     

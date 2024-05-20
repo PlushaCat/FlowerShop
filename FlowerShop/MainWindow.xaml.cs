@@ -44,7 +44,7 @@ namespace FlowerShop
         {
             string selectedFilter = sortProp.SelectedItem.ToString();
             string selectedSort = SortBy.SelectedItem.ToString();
-            ListSortDirection sortDirection = selectedFilter.Contains("Повозрастания") ? ListSortDirection.Ascending : ListSortDirection.Descending;
+            ListSortDirection sortDirection = selectedFilter.Contains("по возрастанию") ? ListSortDirection.Ascending : ListSortDirection.Descending;
 
             var view = (CollectionView)CollectionViewSource.GetDefaultView(ListView1.ItemsSource);
             view.SortDescriptions.Clear();

@@ -27,7 +27,7 @@
           <Key>
             <PropertyRef Name="idgood" />
           </Key>
-          <Property Name="idgood" Type="int" Nullable="false" />
+          <Property Name="idgood" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="250" />
           <Property Name="description" Type="nvarchar" MaxLength="250" />
           <Property Name="price" Type="int" />
@@ -58,10 +58,15 @@
           <Key>
             <PropertyRef Name="iduser" />
           </Key>
-          <Property Name="iduser" Type="int" Nullable="false" />
+          <Property Name="iduser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="staff" Type="int" />
           <Property Name="login" Type="nvarchar" MaxLength="50" />
           <Property Name="password" Type="nvarchar" MaxLength="50" />
+          <Property Name="phonenumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="patronymic" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_basket_goods1">
           <End Role="goods" Type="Self.goods" Multiplicity="0..1" />
@@ -184,6 +189,11 @@
           <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="basket" Relationship="flowershopModeld.FK_basket_users" FromRole="users" ToRole="basket" />
+          <Property Name="phonenumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityContainer Name="flowershopEntitiesd" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="category" EntityType="Self.category" />
@@ -321,6 +331,11 @@
           <EntitySetMapping Name="users">
             <EntityTypeMapping TypeName="flowershopModeld.users">
               <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="patronymic" ColumnName="patronymic" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phonenumber" ColumnName="phonenumber" />
                 <ScalarProperty Name="iduser" ColumnName="iduser" />
                 <ScalarProperty Name="staff" ColumnName="staff" />
                 <ScalarProperty Name="login" ColumnName="login" />
