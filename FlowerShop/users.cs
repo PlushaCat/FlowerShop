@@ -17,7 +17,7 @@ namespace FlowerShop
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public users()
         {
-            this.basket = new HashSet<basket>();
+            this.orders = new HashSet<orders>();
         }
     
         public int iduser { get; set; }
@@ -31,6 +31,6 @@ namespace FlowerShop
         public string patronymic { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<basket> basket { get; set; }
+        public virtual ICollection<orders> orders { get; set; }
     }
 }

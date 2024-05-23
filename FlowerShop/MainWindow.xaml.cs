@@ -64,13 +64,13 @@ namespace FlowerShop
 
             var cartItem = new basket
             {
-                goods = selectedProduct,
+                idbasket = DatabaseFlower.authUserId,
                 idgood = selectedProduct.idgood,
-                iduser = 1,
-                quantity = 1
+                quantity = 1,
                 
             };
 
+  
 
             DatabaseFlower.entity.basket.Add(cartItem);
             DatabaseFlower.entity.SaveChanges();

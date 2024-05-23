@@ -22,7 +22,8 @@ namespace FlowerShop
         public Registration()
         {
             InitializeComponent();
-           
+            DatabaseFlower.entity = new flowershopEntitiesd();
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -43,64 +44,107 @@ namespace FlowerShop
                  var patronymic = PatronymicBox.Text.Trim();
 
             if (login.Length < 7 || password.Length < 7 || phonenumber.Length < 7 || email.Length < 7 || name.Length < 2 || surname.Length < 2 || patronymic.Length < 2)
+            {
                 MessageBox.Show("Длина символов в поле слишком мала");
+                return;
+            }
+                
+            
+
             var passwordConfirm = ConfirmPasswordBox.Text.Trim();
+
+
+            if (!(passwordConfirm == password))
+            {
+                MessageBox.Show("Пароль не равен подтверждённому паролю");
+                return;
+            }
+
 
             if (string.IsNullOrEmpty(password) || string.IsNullOrEmpty(passwordConfirm) || string.IsNullOrEmpty(phonenumber) || 
                 string.IsNullOrEmpty(email) || string.IsNullOrEmpty(name) || string.IsNullOrEmpty(surname) || string.IsNullOrEmpty(patronymic) || string.IsNullOrEmpty(login))
+            {
                 MessageBox.Show("Заполните все поля");
-
-            if (password.Any(char.IsUpper) || password.Any(char.IsLower))
-            {
-                MessageBox.Show("Слабый пароль, исплользуйте разные регистры");
+                return;
             }
 
-            
-            if (password.Any(char.IsDigit))
+
+            if (char.IsDigit(login[0]))
             {
-                MessageBox.Show("Слабый пароль, исплользуйте цифры и буквы вместе");
+                MessageBox.Show("логин не должен начинатся с цифр");
+                return;
             }
 
+            if (!password.Any(char.IsDigit) && !password.Any(char.IsLetter))
+            {
+                MessageBox.Show("Слабый пароль, используйте цифры и буквы вместе");
+                return;
+            }
+
+
+            if (!password.Any(char.IsUpper) && !password.Any(char.IsLower))
+            {
+                MessageBox.Show("Слабый пароль, исплользуйте разные регистры и буквы");
+                return;
+            }
             
-            if (password.Any(c => !char.IsLetterOrDigit(c)))
+            if (!password.Any(c => !char.IsLetterOrDigit(c)))
             {
                 MessageBox.Show("Слабый пароль, исплользуйте специльные символы");
+                return;
             }
 
-            if (email.Any(c => !char.IsLetterOrDigit(c)))
+            if (!email.Any(c => !char.IsLetterOrDigit(c)))
             {
-                MessageBox.Show("Неправильный Email");
+                MessageBox.Show("Неправильный формат Email");
+                return;
+            }
+
+            if (login.Length > 24 || password.Length > 24 || phonenumber.Length > 24 || email.Length > 40 || name.Length > 50 || surname.Length > 50 || patronymic.Length > 50)
+            {
+                MessageBox.Show("Длина символов в поле слишком длинная");
+                return;
+            }
+
+            if (!name.Any(c => !char.IsDigit(c)) || !surname.Any(c => !char.IsDigit(c)) || !patronymic.Any(c => !char.IsDigit(c)))
+            {
+                if (!name.Any(c => !char.IsSeparator(c)) || !surname.Any(c => !char.IsSeparator(c)) || !patronymic.Any(c => !char.IsSeparator(c)))
+                {
+                    MessageBox.Show("ФИО не должна содержать цифр и знаков");
+                    return;
+                }
+            }
+
+            try
+            {
+                users user = new users()
+                {
+                    staff = 0,
+                    login = login,
+                    password = password,
+                    phonenumber = phonenumber,
+                    email = email,
+                    name = name,
+                    surname = surname,
+                    patronymic = patronymic
+                };
+
+                DatabaseFlower.entity.users.Add(user);
+                DatabaseFlower.entity.SaveChanges();
+                DatabaseFlower.authUserId = user.iduser;
+                MessageBox.Show("Вы успешно зарегистрированы");
+                
+
+                MainWindow mainWin = new MainWindow();
+                mainWin.Show();
+                this.Close();
+            }
+            catch
+            {
+                MessageBox.Show("пользователь не создается в базе данных");
             }
 
 
-
-
-
-
-            var loginVerf = LoginBox.Text;
-            var passwordVerf = LoginBox.Text;
-            var phonenumberVerf = LoginBox.Text;
-            var emailVerf = LoginBox.Text;
-            var nameVerf = LoginBox.Text;
-            var surnameVerf = LoginBox.Text;
-            var patronymic = LoginBox.Text;
-
-
-            var user = new users
-            {
-                iduser = 1,
-                staff = 0,
-                login = LoginBox.Text,
-                password = PasswordBox.Text,
-                phonenumber = PhoneBox.Text,
-                email = EmailBox.Text,
-                name = NameBox.Text,
-                surname = SurnameBox.Text, 
-                patronymic = PatronymicBox.Text,
-            };
-
-            DatabaseFlower.entity.users.Add(user);
-            DatabaseFlower.entity.SaveChanges();
         }
     }
 }

@@ -9,5 +9,9 @@ namespace FlowerShop
     internal class DatabaseFlower
     {
         public static flowershopEntitiesd entity;
+
+        public static int authUserId;
+
+
     }
 }

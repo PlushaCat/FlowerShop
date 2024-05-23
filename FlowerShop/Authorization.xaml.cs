@@ -22,13 +22,56 @@ namespace FlowerShop
         public Authorization()
         {
             InitializeComponent();
-        }
+			DatabaseFlower.entity = new flowershopEntitiesd();
+		}
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Registration registration = new Registration();
             registration.Show();
             this.Close();
+            
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+			try
+			{
+				string login = LoginBox.Text.Trim();
+				string password = PasswordBox.Text.Trim();
+
+				if (!string.IsNullOrEmpty(login) && login.Length >= 3 && login.Length <= 50)
+				{
+					if (!string.IsNullOrEmpty(password) && 3 <= password.Length && password.Length <= 50)
+					{
+						var userDb = DatabaseFlower.entity.users.FirstOrDefault(x => x.login == login && x.password == password);
+						if (userDb.iduser != 0)
+						{
+							DatabaseFlower.authUserId = userDb.iduser;
+							MessageBox.Show("Успешный вход");
+							MainWindow mainWindoww = new MainWindow();
+							mainWindoww.Show();
+							this.Close();
+						}
+						else
+						{
+							MessageBox.Show("Не можете войти! Возможно, вы ввели неправильный логин или пароль.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+						}
+					}
+					else
+					{
+						MessageBox.Show("Поле пароля пусто!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+					}
+				}
+				else
+				{
+					MessageBox.Show("Поле для входа пусто!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+				}
+			}
+			catch
+			{
+				MessageBox.Show("Пользователь не найден");
+			}
+		}
     }
 }
