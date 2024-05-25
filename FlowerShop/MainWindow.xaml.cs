@@ -34,6 +34,8 @@ namespace FlowerShop
             SortBy.SelectedValue = "Название";
             ListView1.Items.SortDescriptions.Add(new SortDescription("name", ListSortDirection.Ascending));
 
+            ListView1.Items.Filter = NameFilter;
+
             sortProp.SelectionChanged += SelectionChanged;
             SortBy.SelectionChanged += SelectionChanged;
 
@@ -57,12 +59,19 @@ namespace FlowerShop
             view.SortDescriptions.Add(new SortDescription(selectedSort, sortDirection));
         }
 
+        private bool NameFilter(object obj)
+        {
+            var FilterObj = obj as goods;
+
+            return FilterObj.name.Contains(filter.Text);
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
             var selectedProduct = ListView1.SelectedItem as goods;
 
-            var cartItem = new basket
+            var cartItem = new basket()
             {
                 idbasket = DatabaseFlower.authUserId,
                 idgood = selectedProduct.idgood,
@@ -76,5 +85,20 @@ namespace FlowerShop
             DatabaseFlower.entity.SaveChanges();
 
             }
+
+        private void filter_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (filter.Text == null)
+                ListView1.Items.Filter = null;
+            else
+                ListView1.Items.Filter = NameFilter;
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            orderWin orderWindow = new orderWin();
+            orderWindow.Show();
+            this.Close();
+        }
     }
 }
