@@ -31,11 +31,11 @@ namespace FlowerShop
             {
                 if (String.IsNullOrEmpty(image) || String.IsNullOrWhiteSpace(image))
                 {
-                    return "../Images/picture.png";
+                    return "../images/picture.png";
                 }
                 else
                 {
-                    return $"../Images/{image}";
+                    return $"../images/{image}";
                 }
             }
         }

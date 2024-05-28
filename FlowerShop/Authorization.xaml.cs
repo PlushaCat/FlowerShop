@@ -48,6 +48,7 @@ namespace FlowerShop
 						if (userDb.iduser != 0)
 						{
 							DatabaseFlower.authUserId = userDb.iduser;
+							DatabaseFlower.staff = userDb.staff;
 							MessageBox.Show("Успешный вход");
 							MainWindow mainWindoww = new MainWindow();
 							mainWindoww.Show();

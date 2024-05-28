@@ -37,7 +37,7 @@
           <Key>
             <PropertyRef Name="idorder" />
           </Key>
-          <Property Name="idorder" Type="int" Nullable="false" />
+          <Property Name="idorder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="orderdate" Type="date" />
           <Property Name="orderstatus" Type="int" />
           <Property Name="iduser" Type="int" />

@@ -11,6 +11,7 @@ namespace FlowerShop
         public static flowershopEntitiesd entity;
 
         public static int authUserId;
+        public static int? staff;
 
 
     }

@@ -26,6 +26,11 @@ namespace FlowerShop
             InitializeComponent();
             DatabaseFlower.entity = new flowershopEntitiesd();
             ListView1.ItemsSource = DatabaseFlower.entity.goods.ToList();
+            if (DatabaseFlower.staff == 1)
+                AdminButton.Visibility = Visibility.Visible;
+
+            
+
             SortBy.ItemsSource = new string[] { "Название", "цена" };
             var enumDirection = new string[] { "по возрастанию", "по убыванию" };
 
@@ -107,6 +112,11 @@ namespace FlowerShop
             orderWin orderWindow = new orderWin();
             orderWindow.Show();
             this.Close();
+        }
+
+        private void AdminButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
