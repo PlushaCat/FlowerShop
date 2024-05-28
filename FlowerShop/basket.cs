@@ -14,10 +14,11 @@ namespace FlowerShop
     
     public partial class basket
     {
-        public int idbasket { get; set; }
+        public int id { get; set; }
         public Nullable<int> idgood { get; set; }
         public Nullable<int> quantity { get; set; }
         public Nullable<int> idorder { get; set; }
+        public Nullable<int> idbasket { get; set; }
     
         public virtual goods goods { get; set; }
         public virtual orders orders { get; set; }

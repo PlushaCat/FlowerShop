@@ -4,17 +4,16 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище flowershopModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <!--Ошибки, обнаруженные при создании:
-предупреждение 6002: В таблице или представлении "flowershop.dbo.basket" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+    <Schema Namespace="Хранилище flowershopModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="basket">
           <Key>
-            <PropertyRef Name="idbasket" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="idbasket" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="idgood" Type="int" />
           <Property Name="quantity" Type="int" />
           <Property Name="idorder" Type="int" />
+          <Property Name="idbasket" Type="int" />
         </EntityType>
         <EntityType Name="category">
           <Key>
@@ -67,7 +66,7 @@
           <Property Name="surname" Type="nvarchar" MaxLength="50" />
           <Property Name="patronymic" Type="nvarchar" MaxLength="50" />
         </EntityType>
-        <Association Name="FK_basket_goods1">
+        <Association Name="FK_basket_goods">
           <End Role="goods" Type="Self.goods" Multiplicity="0..1" />
           <End Role="basket" Type="Self.basket" Multiplicity="*" />
           <ReferentialConstraint>
@@ -116,20 +115,13 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="Хранилище flowershopModelContainer">
+          <EntitySet Name="basket" EntityType="Self.basket" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="goods" EntityType="Self.goods" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="orders" EntityType="Self.orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="basket" EntityType="Self.basket" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [basket].[idbasket] AS [idbasket], 
-    [basket].[idgood] AS [idgood], 
-    [basket].[quantity] AS [quantity], 
-    [basket].[idorder] AS [idorder]
-    FROM [dbo].[basket] AS [basket]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK_basket_goods1" Association="Self.FK_basket_goods1">
+          <AssociationSet Name="FK_basket_goods" Association="Self.FK_basket_goods">
             <End Role="goods" EntitySet="goods" />
             <End Role="basket" EntitySet="basket" />
           </AssociationSet>
@@ -146,11 +138,22 @@
             <End Role="orders" EntitySet="orders" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="flowershopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="basket">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="idgood" Type="Int32" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="idorder" Type="Int32" />
+          <Property Name="idbasket" Type="Int32" />
+          <NavigationProperty Name="goods" Relationship="Self.FK_basket_goods" FromRole="basket" ToRole="goods" />
+          <NavigationProperty Name="orders" Relationship="Self.FK_basket_orders" FromRole="basket" ToRole="orders" />
+        </EntityType>
         <EntityType Name="category">
           <Key>
             <PropertyRef Name="idcategory" />
@@ -169,8 +172,8 @@
           <Property Name="price" Type="Int32" />
           <Property Name="image" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="idcategory" Type="Int32" />
+          <NavigationProperty Name="basket" Relationship="Self.FK_basket_goods" FromRole="goods" ToRole="basket" />
           <NavigationProperty Name="category" Relationship="Self.FK_goods_category" FromRole="goods" ToRole="category" />
-          <NavigationProperty Name="basket" Relationship="Self.FK_basket_goods1" FromRole="goods" ToRole="basket" />
         </EntityType>
         <EntityType Name="orders">
           <Key>
@@ -208,30 +211,7 @@
           <Property Name="patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="orders" Relationship="Self.FK_orders_users" FromRole="users" ToRole="orders" />
         </EntityType>
-        <EntityType Name="basket">
-          <Key>
-            <PropertyRef Name="idbasket" />
-          </Key>
-          <Property Name="idbasket" Type="Int32" Nullable="false" />
-          <Property Name="idgood" Type="Int32" />
-          <Property Name="quantity" Type="Int32" />
-          <Property Name="idorder" Type="Int32" />
-          <NavigationProperty Name="goods" Relationship="Self.FK_basket_goods1" FromRole="basket" ToRole="goods" />
-          <NavigationProperty Name="orders" Relationship="Self.FK_basket_orders" FromRole="basket" ToRole="orders" />
-        </EntityType>
-        <Association Name="FK_goods_category">
-          <End Role="category" Type="Self.category" Multiplicity="0..1" />
-          <End Role="goods" Type="Self.goods" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="category">
-              <PropertyRef Name="idcategory" />
-            </Principal>
-            <Dependent Role="goods">
-              <PropertyRef Name="idcategory" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_basket_goods1">
+        <Association Name="FK_basket_goods">
           <End Role="goods" Type="Self.goods" Multiplicity="0..1" />
           <End Role="basket" Type="Self.basket" Multiplicity="*" />
           <ReferentialConstraint>
@@ -255,6 +235,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_goods_category">
+          <End Role="category" Type="Self.category" Multiplicity="0..1" />
+          <End Role="goods" Type="Self.goods" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="idcategory" />
+            </Principal>
+            <Dependent Role="goods">
+              <PropertyRef Name="idcategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_orders_users">
           <End Role="users" Type="Self.users" Multiplicity="0..1" />
           <End Role="orders" Type="Self.orders" Multiplicity="*" />
@@ -268,23 +260,23 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="flowershopEntitiesd" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="basket" EntityType="Self.basket" />
           <EntitySet Name="category" EntityType="Self.category" />
           <EntitySet Name="goods" EntityType="Self.goods" />
           <EntitySet Name="orders" EntityType="Self.orders" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="users" EntityType="Self.users" />
-          <EntitySet Name="basket" EntityType="Self.basket" />
-          <AssociationSet Name="FK_goods_category" Association="Self.FK_goods_category">
-            <End Role="category" EntitySet="category" />
-            <End Role="goods" EntitySet="goods" />
-          </AssociationSet>
-          <AssociationSet Name="FK_basket_goods1" Association="Self.FK_basket_goods1">
+          <AssociationSet Name="FK_basket_goods" Association="Self.FK_basket_goods">
             <End Role="goods" EntitySet="goods" />
             <End Role="basket" EntitySet="basket" />
           </AssociationSet>
           <AssociationSet Name="FK_basket_orders" Association="Self.FK_basket_orders">
             <End Role="orders" EntitySet="orders" />
             <End Role="basket" EntitySet="basket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_goods_category" Association="Self.FK_goods_category">
+            <End Role="category" EntitySet="category" />
+            <End Role="goods" EntitySet="goods" />
           </AssociationSet>
           <AssociationSet Name="FK_orders_users" Association="Self.FK_orders_users">
             <End Role="users" EntitySet="users" />
@@ -297,6 +289,17 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="Хранилище flowershopModelContainer" CdmEntityContainer="flowershopEntitiesd">
+          <EntitySetMapping Name="basket">
+            <EntityTypeMapping TypeName="flowershopModel.basket">
+              <MappingFragment StoreEntitySet="basket">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idgood" ColumnName="idgood" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="idorder" ColumnName="idorder" />
+                <ScalarProperty Name="idbasket" ColumnName="idbasket" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="category">
             <EntityTypeMapping TypeName="flowershopModel.category">
               <MappingFragment StoreEntitySet="category">
@@ -350,16 +353,6 @@
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="surname" ColumnName="surname" />
                 <ScalarProperty Name="patronymic" ColumnName="patronymic" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="basket">
-            <EntityTypeMapping TypeName="flowershopModel.basket">
-              <MappingFragment StoreEntitySet="basket">
-                <ScalarProperty Name="idbasket" ColumnName="idbasket" />
-                <ScalarProperty Name="idgood" ColumnName="idgood" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="idorder" ColumnName="idorder" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

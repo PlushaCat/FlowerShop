@@ -24,11 +24,26 @@ namespace FlowerShop
         public string name { get; set; }
         public string description { get; set; }
         public Nullable<int> price { get; set; }
+
+        public string CorrectImage
+        {
+            get
+            {
+                if (String.IsNullOrEmpty(image) || String.IsNullOrWhiteSpace(image))
+                {
+                    return "../Images/picture.png";
+                }
+                else
+                {
+                    return $"../Images/{image}";
+                }
+            }
+        }
         public string image { get; set; }
         public Nullable<int> idcategory { get; set; }
     
-        public virtual category category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<basket> basket { get; set; }
+        public virtual category category { get; set; }
     }
 }

@@ -25,11 +25,11 @@ namespace FlowerShop
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<basket> basket { get; set; }
         public virtual DbSet<category> category { get; set; }
         public virtual DbSet<goods> goods { get; set; }
         public virtual DbSet<orders> orders { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<users> users { get; set; }
-        public virtual DbSet<basket> basket { get; set; }
     }
 }

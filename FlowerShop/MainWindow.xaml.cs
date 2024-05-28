@@ -69,22 +69,30 @@ namespace FlowerShop
         private void Button_Click(object sender, RoutedEventArgs e)
         {
 
-            var selectedProduct = ListView1.SelectedItem as goods;
+            Button button = sender as Button;
+            // Получаем данные текущего элемента
+            var data = button.DataContext as goods;
 
-            var cartItem = new basket()
-            {
-                idbasket = DatabaseFlower.authUserId,
-                idgood = selectedProduct.idgood,
-                quantity = 1,
-                
-            };
-
-  
-
-            DatabaseFlower.entity.basket.Add(cartItem);
-            DatabaseFlower.entity.SaveChanges();
-
+            var isGoods = DatabaseFlower.entity.basket.Any(b => b.idgood == data.idgood);
+            var needGoods = DatabaseFlower.entity.basket.FirstOrDefault(b => b.idgood == data.idgood);
+            if (isGoods) {
+                needGoods.quantity += 1;
+                DatabaseFlower.entity.SaveChanges();
             }
+            else
+            {
+                var cartItem = new basket()
+                {
+                    idbasket = DatabaseFlower.authUserId,
+                    idgood = data.idgood,
+                    quantity = 1,
+
+                };
+                DatabaseFlower.entity.basket.Add(cartItem);
+                DatabaseFlower.entity.SaveChanges();
+            }
+
+        }
 
         private void filter_TextChanged(object sender, TextChangedEventArgs e)
         {

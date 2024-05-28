@@ -9,7 +9,7 @@
 
     <Grid Margin="0,60,0,0">
 
-        <ListView x:Name="ListView2" ItemsSource="{d:SampleData}">
+        <ListView x:Name="ListView2">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -39,11 +39,13 @@
                             <Run Text="Количество"></Run>
                             <Run Text="{Binding quantity}"></Run>
                         </TextBlock>
+                        <Button Grid.Column="2" Content="Удалить из корзины" Margin="10,64,115,26" Click="Button_Click"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListView>
-        <Button Content="Сделать заказ" HorizontalAlignment="Left" Margin="685,-47,0,0" VerticalAlignment="Top" Height="42" Width="104"/>
+        <Button Content="Сделать заказ" HorizontalAlignment="Left" Margin="685,-53,0,0" VerticalAlignment="Top" Height="42" Width="104" Click="Button_Click_2"/>
+        <Button Content="Назад в магазин" HorizontalAlignment="Left" Margin="14,-53,0,0" VerticalAlignment="Top" Height="42" Width="145" Click="Button_Click_1"/>
 
 
     </Grid>
