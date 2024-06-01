@@ -12,6 +12,7 @@ namespace FlowerShop
 
         public static int authUserId;
         public static int? staff;
+        public static string ImageToAdd;
 
 
     }
