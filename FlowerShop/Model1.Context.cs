@@ -29,7 +29,6 @@ namespace FlowerShop
         public virtual DbSet<category> category { get; set; }
         public virtual DbSet<goods> goods { get; set; }
         public virtual DbSet<orders> orders { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<users> users { get; set; }
     }
 }

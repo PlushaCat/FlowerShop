@@ -9,7 +9,6 @@
         <EntityTypeShape EntityType="flowershopModel.category" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
         <EntityTypeShape EntityType="flowershopModel.goods" Width="1.5" PointX="3" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="flowershopModel.orders" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="flowershopModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="flowershopModel.users" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="flowershopModel.FK_basket_goods" ManuallyRouted="false" />
         <AssociationConnector Association="flowershopModel.FK_basket_orders" ManuallyRouted="false" />

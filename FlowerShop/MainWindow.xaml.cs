@@ -83,6 +83,7 @@ namespace FlowerShop
             if (isGoods) {
                 needGoods.quantity += 1;
                 DatabaseFlower.entity.SaveChanges();
+                MessageBox.Show("Успешно добавлено");
             }
             else
             {
@@ -95,6 +96,7 @@ namespace FlowerShop
                 };
                 DatabaseFlower.entity.basket.Add(cartItem);
                 DatabaseFlower.entity.SaveChanges();
+                MessageBox.Show("Успешно добавлено");
             }
 
         }
@@ -116,7 +118,9 @@ namespace FlowerShop
 
         private void AdminButton_Click(object sender, RoutedEventArgs e)
         {
-
+            AdminPage adminpage = new AdminPage();
+            adminpage.Show();
+            this.Close();
         }
     }
 }
