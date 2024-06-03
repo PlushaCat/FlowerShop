@@ -35,17 +35,19 @@
                                 <Run Text="{Binding goods.price}"></Run>
                                 <Run Text="Р. за штуку"></Run>
                         </TextBlock>
-                        <TextBlock Grid.Column="2" Margin="10,38,150,-38">
-                            <Run Text="Количество"></Run>
+                        <TextBlock Grid.Column="2" Margin="80,76,80,-76">
                             <Run Text="{Binding quantity}"></Run>
                         </TextBlock>
-                        <Button Grid.Column="2" Content="Удалить из корзины" Margin="10,64,115,26" Click="Button_Click"/>
+                        <Button Grid.Column="2" Content="Удалить из корзины" Margin="45,108,113,5" Click="Button_Click"/>
+                        <Button Grid.Column="2" Content="-" Margin="31,76,237,41" Click="Button_Click_3"/>
+                        <Button Grid.Column="2" Content="+" Margin="160,76,105,41" Click="Button_Click_4"/>
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListView>
         <Button Content="Сделать заказ" HorizontalAlignment="Left" Margin="685,-53,0,0" VerticalAlignment="Top" Height="42" Width="104" Click="Button_Click_2"/>
         <Button Content="Назад в магазин" HorizontalAlignment="Left" Margin="14,-53,0,0" VerticalAlignment="Top" Height="42" Width="145" Click="Button_Click_1"/>
+        <Button Content="Сделать пдф заказа" HorizontalAlignment="Left" Margin="529,-50,0,0" VerticalAlignment="Top" Height="36" Width="133" Click="Button_Click_5"/>
 
 
     </Grid>
