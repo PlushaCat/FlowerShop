@@ -33,7 +33,7 @@
             <Button x:Name="AdminButton" Grid.Column="3" Content="Редактирование" HorizontalAlignment="Center" VerticalAlignment="Center" Height="45" Width="144" Visibility="Hidden" Click="AdminButton_Click"/>
         </Grid>
         <Grid Margin="0,60,0,0">
-            <ListView x:Name="ListView1">
+            <ListView x:Name="ListView1" SelectionChanged="ListView1_SelectionChanged">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Grid>
@@ -49,6 +49,8 @@
                                 <Run Text="{Binding name}"></Run>
 
                             </TextBlock>
+                            <Button Grid.Column="1" Height="30" Width="120" Content="Удалить товар" Margin="256,89,24,21" Click="Button_Click_4"/>
+                            <Button Grid.Column="1" Height="30" Width="120" Content="Редактировать товар" Margin="256,10,24,100" Click="Button_Click_3"/>
 
                             <TextBlock Grid.Column="1" Margin="0,38,0,0">
                                 <Run Text="{Binding description}" Cursor="AppStarting"></Run>
