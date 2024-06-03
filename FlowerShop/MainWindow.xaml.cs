@@ -86,7 +86,6 @@ namespace FlowerShop
                 MessageBox.Show("Успешно добавлено");
             }
             else
-            //ttttll
 
             {
                 var cartItem = new basket()
