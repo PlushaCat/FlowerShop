@@ -58,3 +58,5 @@ namespace FlowerShop
         }
     }
 }
+//            File.Copy(paths, System.IO.Path.GetFullPath(System.IO.Path.Combine(System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "..", ".."), $"images\\{saymyname}")));
+
